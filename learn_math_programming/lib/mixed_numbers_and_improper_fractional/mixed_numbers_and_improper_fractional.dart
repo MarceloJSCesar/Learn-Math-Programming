@@ -38,18 +38,18 @@ void main() {
 void transformToImproperFraction() {
   late String improperFraction;
   late String mixedNumber;
-  late double integrerNum;
+  late double wholeNumber;
   late double numeratorNum;
   late double denomeratorNum;
 
   // input
   print('** type the integrer number \n');
-  integrerNum = double.tryParse(stdin.readLineSync() ?? '0.0') ?? 0.0;
+  wholeNumber = double.tryParse(stdin.readLineSync() ?? '0.0') ?? 0.0;
   print('** type the numerador number \n');
   numeratorNum = double.tryParse(stdin.readLineSync() ?? '0.0') ?? 0.0;
   print('** type the denomerador number \n');
   denomeratorNum = double.tryParse(stdin.readLineSync() ?? '1.0') ?? 1.0;
-  mixedNumber = "'$integrerNum' + '$numeratorNum' / '$denomeratorNum'";
+  mixedNumber = "'$wholeNumber' + '$numeratorNum' / '$denomeratorNum'";
   print("== Our mixed numeber is: $mixedNumber == \n ");
 
   // output
@@ -58,7 +58,7 @@ void transformToImproperFraction() {
         "cannot calculate because the denominator is equal to: $denomeratorNum";
   } else {
     improperFraction =
-        "the improper fraction is equal to: ${(integrerNum * denomeratorNum) + numeratorNum} / $denomeratorNum";
+        "the improper fraction is equal to: ${(wholeNumber * denomeratorNum) + numeratorNum} / $denomeratorNum";
   }
 
   print("\n == $improperFraction == \n");
@@ -69,7 +69,7 @@ void transformToMixedNumbers() {
   late String mixedNumber;
 
   // for mixed number
-  late int integrerNum;
+  late int wholeNumber;
   late double newNumeratorNum;
 
   // for improper fraction
@@ -87,11 +87,11 @@ void transformToMixedNumbers() {
     mixedNumber =
         "cannot calculate because the denominator is equal to: $denomeratorNum";
   } else {
-    newNumeratorNum = (numeratorNum / denomeratorNum);
-    integrerNum =
-        (((numeratorNum - newNumeratorNum).round()) / denomeratorNum).round();
+    newNumeratorNum = (numeratorNum % denomeratorNum);
+    wholeNumber = numeratorNum ~/
+        denomeratorNum; // using truncation divison to convert the result to an integrer
     mixedNumber =
-        "the mixed number is equal to: $integrerNum * $newNumeratorNum / $denomeratorNum}";
+        "the mixed number is equal to: $wholeNumber * $newNumeratorNum / $denomeratorNum}";
   }
 
   print("\n == $mixedNumber == \n");
