@@ -91,7 +91,7 @@ void transformToMixedNumbers() {
     wholeNumber = numeratorNum ~/
         denomeratorNum; // using truncation divison operator to convert the result to an integrer
     mixedNumber =
-        "the mixed number is equal to: $wholeNumber * $newNumeratorNum / $denomeratorNum}";
+        "the mixed number is equal to: $wholeNumber + $newNumeratorNum / $denomeratorNum}";
   }
 
   print("\n == $mixedNumber == \n");
