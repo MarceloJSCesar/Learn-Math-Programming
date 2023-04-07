@@ -2,37 +2,97 @@ import 'dart:io';
 
 void main() {
   print(
-      "Welcome \n we're going to transform a mixed number into improper fractional ");
-  late String improperNumber;
-  late String mixedNumber;
-  late int integrerNum;
-  late double numeratorNum;
-  late double denomeratorNum;
-  print('type the integrer number \n');
-  integrerNum = int.parse(stdin.readLineSync() ?? '0');
-  print('type the numerador number \n');
-  numeratorNum = double.parse(stdin.readLineSync() ?? '0');
-  print('type the denomerador number \n');
-  denomeratorNum = double.parse(stdin.readLineSync() ?? '0');
-  mixedNumber = "'$integrerNum' + '$numeratorNum' / '$denomeratorNum'";
-  print("Our mixed numeber is: $mixedNumber");
-  improperNumber = transformToImproperFraction(
-      integrerNum: integrerNum,
-      denomeratorNum: denomeratorNum,
-      numeratorNum: numeratorNum);
-  print("the improper number or fraction is equal to: $improperNumber");
-}
-
-String transformToImproperFraction(
-    {int? integrerNum, double? numeratorNum, double? denomeratorNum}) {
-  if ((denomeratorNum ?? 0.0) == 0.0) {
-    print("cannot calculate because the denominator is: 0");
-    return "";
-  } else {
-    return "${((integrerNum ?? 0) * denomeratorNum!) + (numeratorNum ?? 0.0)} / $denomeratorNum";
+      "=== Welcome to MathProgramming === \n We're going to transform a mixed number into improper fraction and vice-versa");
+  bool canRun = true;
+  while (canRun) {
+    List<String> options = [
+      "\n 0 -> turn mixed number into improper fraction \n",
+      "1 -> turn improper fraction into mixed number \n",
+      "2 -> exit the program",
+    ];
+    late int optionNum;
+    print(
+        "please choose of the following options by typing the number \n ${options.cast().toString().replaceAll('[', '').replaceAll(']', '').replaceAll(',', '')}");
+    optionNum = int.tryParse((stdin.readLineSync() ?? '3')) ?? 3;
+    switch (optionNum) {
+      case 0:
+        print("\n == ${options[optionNum]} == \n ");
+        transformToImproperFraction();
+        break;
+      case 1:
+        print("\n == ${options[optionNum]} == \n ");
+        transformToMixedNumbers();
+        break;
+      case 2:
+        print("\n == ${options[optionNum]} == \n ");
+        canRun = false;
+        break;
+      default:
+        print(
+            "\n == the following value typed do not matched to any options == \n ");
+        break;
+    }
   }
 }
 
-String transformToMixedNumbers() {
-  return "";
+void transformToImproperFraction() {
+  late String improperFraction;
+  late String mixedNumber;
+  late double integrerNum;
+  late double numeratorNum;
+  late double denomeratorNum;
+
+  // input
+  print('** type the integrer number \n');
+  integrerNum = double.tryParse(stdin.readLineSync() ?? '0.0') ?? 0.0;
+  print('** type the numerador number \n');
+  numeratorNum = double.tryParse(stdin.readLineSync() ?? '0.0') ?? 0.0;
+  print('** type the denomerador number \n');
+  denomeratorNum = double.tryParse(stdin.readLineSync() ?? '1.0') ?? 1.0;
+  mixedNumber = "'$integrerNum' + '$numeratorNum' / '$denomeratorNum'";
+  print("== Our mixed numeber is: $mixedNumber == \n ");
+
+  // output
+  if (denomeratorNum <= 0.0) {
+    improperFraction =
+        "cannot calculate because the denominator is equal to: $denomeratorNum";
+  } else {
+    improperFraction =
+        "the improper fraction is equal to: ${(integrerNum * denomeratorNum) + numeratorNum} / $denomeratorNum";
+  }
+
+  print("\n == $improperFraction == \n");
+}
+
+void transformToMixedNumbers() {
+  // general
+  late String mixedNumber;
+
+  // for mixed number
+  late int integrerNum;
+  late double newNumeratorNum;
+
+  // for improper fraction
+  late double numeratorNum;
+  late double denomeratorNum;
+
+  // input
+  print('** type the numerador number \n');
+  numeratorNum = double.tryParse(stdin.readLineSync() ?? '0.0') ?? 0.0;
+  print('** type the denomerador number \n');
+  denomeratorNum = double.tryParse(stdin.readLineSync() ?? '1.0') ?? 1.0;
+
+  // output
+  if (denomeratorNum <= 0.0) {
+    mixedNumber =
+        "cannot calculate because the denominator is equal to: $denomeratorNum";
+  } else {
+    newNumeratorNum = (numeratorNum / denomeratorNum);
+    integrerNum =
+        (((numeratorNum - newNumeratorNum).round()) / denomeratorNum).round();
+    mixedNumber =
+        "the mixed number is equal to: $integrerNum * $newNumeratorNum / $denomeratorNum}";
+  }
+
+  print("\n == $mixedNumber == \n");
 }
