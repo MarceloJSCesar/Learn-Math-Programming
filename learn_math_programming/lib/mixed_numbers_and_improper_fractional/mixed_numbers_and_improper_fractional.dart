@@ -89,7 +89,7 @@ void transformToMixedNumbers() {
   } else {
     newNumeratorNum = (numeratorNum % denomeratorNum);
     wholeNumber = numeratorNum ~/
-        denomeratorNum; // using truncation divison to convert the result to an integrer
+        denomeratorNum; // using truncation divison operator to convert the result to an integrer
     mixedNumber =
         "the mixed number is equal to: $wholeNumber * $newNumeratorNum / $denomeratorNum}";
   }
